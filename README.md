@@ -61,6 +61,38 @@ AS
      'com.bigdata.postgres.Aes.decrypt' 
 LANGUAGE 'java' VOLATILE;
 ```
+
+
+### Sample tests
+```bash
+create  table test_tbl(
+ 	name text,
+  	msisdn text
+);
+
+insert  into test_tbl values('Ken', ENCRYPT('254727128043','n9Tp9+69gxNdUg9F632u1cCRuqcOuGmN','AES/CBC/PKCS5Padding'))
+insert  into test_tbl values('Alen', ENCRYPT('727399473','n9Tp9+69gxNdUg9F632u1cCRuqcOuGmN','AES/CBC/PKCS5Padding'))
+
+select  * from  test_tbl
+
+```
+|name|msisdn|
+|----|------|
+|Ken|Tywy7Y272MmuDlrewpOV9A==|
+|Alen|i2v/RyXZHmfEUWZgcMx+XQ==|
+
+Querying the table and Decrypting the col:
+
+```bash
+select  name, DECRYPT(msisdn,'n9Tp9+69gxNdUg9F632u1cCRuqcOuGmN','AES/CBC/PKCS5Padding')   from test_tbl tt ;
+
+```
+|name|decrypt|
+|----|-------|
+|Ken|254727128043|
+|Alen|727399473|
+
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
