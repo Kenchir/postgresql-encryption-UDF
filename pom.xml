@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
-  <artifactId>EcrypDecryptPostgres</artifactId>
+  <artifactId>EcryptDecryptPostgres</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>EcrypDecryptPostgres</name>
+  <name>EcryptDecryptPostgres</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
