@@ -24,8 +24,10 @@ public  class Aes {
      */
 
 
-    public static String encrypt( String plainText,  String key, String algorithm)
+    public static String encrypt( String plainText,  String key)
     {
+
+        String algorithm = "AES/CBC/PKCS5Padding";
 
         SecretKeySpec secretKeySpec = new SecretKeySpec(Base64.getDecoder().decode(key), "AES");
         Cipher cipher = null;
@@ -57,9 +59,9 @@ public  class Aes {
      * @param key private key
      */
 
-    public  static  String decrypt(String cipherText, String key, String algorithm)
+    public  static  String decrypt(String cipherText, String key)
     {
-
+        String algorithm = "AES/CBC/PKCS5Padding";
         SecretKeySpec secretKeySpec = new SecretKeySpec(Base64.getDecoder().decode(key), "AES");
         Cipher cipher = null;
         try {
