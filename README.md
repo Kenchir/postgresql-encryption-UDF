@@ -40,13 +40,15 @@ Create pljava extension and load your packaged jar from your location.
 
 create  extension if not EXISTS pljava;
 
+Load the jar from your destination
+
 SELECT sqlj.install_jar('file:///ext-configs/EcryptDecryptPostgres-1.0-SNAPSHOT.jar', 'Aes', true);	
 
 SELECT sqlj.set_classpath('public', 'Aes');
 ```
 #### Create your Encryption  function
 ```sql
-CREATE OR REPLACE function ENCRYPT(column varchar ,key varchar ,algorithm varchar ) 
+CREATE OR REPLACE function ENCRYPT(col varchar ,aes_key varchar ) 
 RETURNS "varchar" 
 AS 
      'com.bigdata.postgres.Aes.encrypt' 
@@ -55,7 +57,7 @@ LANGUAGE 'java' VOLATILE;
 
 #### Create your Decryption function
 ```sql
-CREATE OR REPLACE function DECRYPT(column varchar ,key varchar ,algorithm varchar ) 
+CREATE OR REPLACE function DECRYPT(col varchar ,aes_key varchar ,algorithm varchar ) 
 RETURNS "varchar" 
 AS 
      'com.bigdata.postgres.Aes.decrypt' 
@@ -70,8 +72,8 @@ create  table test_tbl(
   	msisdn text
 );
 
-insert  into test_tbl values('Ken', ENCRYPT('254727128043','n9Tp9+69gxNdUg9F632u1cCRuqcOuGmN','AES/CBC/PKCS5Padding'))
-insert  into test_tbl values('Alen', ENCRYPT('727399473','n9Tp9+69gxNdUg9F632u1cCRuqcOuGmN','AES/CBC/PKCS5Padding'))
+insert  into test_tbl values('Ken', ENCRYPT('254727128043','n9Tp9+69gxNdUg9F632u1cCRuqcOuGmN'))
+insert  into test_tbl values('Alen', ENCRYPT('727399473','n9Tp9+69gxNdUg9F632u1cCRuqcOuGmN'))
 
 select  * from  test_tbl
 
@@ -84,7 +86,7 @@ select  * from  test_tbl
 Querying the table and Decrypting the col:
 
 ```bash
-select  name, DECRYPT(msisdn,'n9Tp9+69gxNdUg9F632u1cCRuqcOuGmN','AES/CBC/PKCS5Padding')   from test_tbl tt ;
+select  name, DECRYPT(msisdn,'n9Tp9+69gxNdUg9F632u1cCRuqcOuGmN')   from test_tbl tt ;
 
 ```
 |name|decrypt|
