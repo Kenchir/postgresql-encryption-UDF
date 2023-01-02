@@ -9,8 +9,7 @@ i. Encrypt:
 ii. Decrypt
 
 
-
-## Requirements
+## Requirements     
 - jdk-11
 
 
