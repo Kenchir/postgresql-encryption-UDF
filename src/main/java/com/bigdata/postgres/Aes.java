@@ -165,10 +165,9 @@ public class Aes {
     public  static String getBearerToken(String BASE_URL){
         String bearerAuth="";
         try {
-            String authUsername = "svc-bigdata-admin";
-            String authPassword = "lyOdmSBwCsZnD4dLnOAE";
-//            authPassword="Mama@123$Ken#";
-//            authUsername="Kenneth.Chirchir";
+            String authUsername =null;
+            String authPassword=null;
+
             String url = String.format(BASE_URL+ "/access/token");
             String creds = "Basic "+ Base64.getEncoder().encodeToString( (authUsername+":"+authPassword).getBytes());
             HttpPost request = new HttpPost(url);
